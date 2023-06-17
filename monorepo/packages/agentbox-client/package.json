@@ -1,6 +1,6 @@
 {
   "name": "@dbc-tech/agentbox-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "AgentBox CRM integration",
   "author": "DBC",
   "private": false,
@@ -34,5 +34,9 @@
     "setupFilesAfterEnv": [
       "./src/setupTests.ts"
     ]
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   }
 }
