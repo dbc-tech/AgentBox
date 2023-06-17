@@ -37,26 +37,18 @@ export class AgentBoxService {
     this.http = new HttpService(this.config.baseUrl)
   }
 
-  getOptions(
-    apiKey: string,
-    clientId: string,
-    searchParams?: SearchParams,
-  ): HttpRequestOptions {
+  getOptions(searchParams?: SearchParams): HttpRequestOptions {
     return {
       headers: {
-        'X-Client-ID': clientId,
-        'X-API-Key': apiKey,
+        'X-Client-ID': this.config.clientId,
+        'X-API-Key': this.config.apiKey,
       },
       searchParams: { ...searchParams, version: AGENT_BOX_API_VERSION },
     }
   }
 
-  async getStaffs(
-    apiKey: string,
-    clientId: string,
-    searchParams = getStaffsSearchParams(),
-  ) {
-    const options = this.getOptions(apiKey, clientId, searchParams)
+  async getStaffs(searchParams = getStaffsSearchParams()) {
+    const options = this.getOptions(searchParams)
     //this.logger.log(`getStaffs options: ${JSON.stringify(options)}`);
 
     const { data } = await this.http.getJson<AgentBoxGetStaffs>(
@@ -68,12 +60,8 @@ export class AgentBoxService {
     return data?.response?.staffMembers ?? []
   }
 
-  async getInspections(
-    apiKey: string,
-    clientId: string,
-    searchParams = getInspectionsSearchParams(),
-  ) {
-    const options = this.getOptions(apiKey, clientId, searchParams)
+  async getInspections(searchParams = getInspectionsSearchParams()) {
+    const options = this.getOptions(searchParams)
     //this.logger.log(`getInspections options: ${JSON.stringify(options)}`);
 
     const { data } = await this.http.getJson<AgentBoxGetInspections>(
@@ -85,12 +73,8 @@ export class AgentBoxService {
     return data?.response?.inspections ?? []
   }
 
-  async getListings(
-    apiKey: string,
-    clientId: string,
-    searchParams = getListingsSearchParams(),
-  ) {
-    const options = this.getOptions(apiKey, clientId, searchParams)
+  async getListings(searchParams = getListingsSearchParams()) {
+    const options = this.getOptions(searchParams)
     //this.logger.log(`getListings options: ${JSON.stringify(options)}`);
 
     const { data } = await this.http.getJson<AgentBoxGetListings>(
@@ -102,12 +86,8 @@ export class AgentBoxService {
     return data?.response?.listings ?? []
   }
 
-  async getListingLinks(
-    apiKey: string,
-    clientId: string,
-    searchParams = getListingLinksSearchParams(),
-  ) {
-    const options = this.getOptions(apiKey, clientId, searchParams)
+  async getListingLinks(searchParams = getListingLinksSearchParams()) {
+    const options = this.getOptions(searchParams)
     //this.logger.log(`getListingLinks options: ${JSON.stringify(options)}`);
 
     const { data } = await this.http.getJson<AgentBoxGetListingLinks>(
@@ -119,21 +99,13 @@ export class AgentBoxService {
     return data?.response?.listingLinks ?? []
   }
 
-  async getListingLinksForListingId(
-    apiKey: string,
-    clientId: string,
-    listingId: string,
-  ) {
+  async getListingLinksForListingId(listingId: string) {
     const searchParams = getListingLinksSearchParams({ listingId })
-    return await this.getListingLinks(apiKey, clientId, searchParams)
+    return await this.getListingLinks(searchParams)
   }
 
-  async createListingLink(
-    apiKey: string,
-    clientId: string,
-    json: AgentBoxCreateListingLink,
-  ) {
-    const options = this.getOptions(apiKey, clientId)
+  async createListingLink(json: AgentBoxCreateListingLink) {
+    const options = this.getOptions()
     const { data } = await this.http.postJson(
       this.http.urlFromPath('listing-links'),
       json,
@@ -145,12 +117,10 @@ export class AgentBoxService {
   }
 
   async updateListingLink(
-    apiKey: string,
-    clientId: string,
     json: AgentBoxUpdateListingLink,
     listingLinkId: string,
   ) {
-    const options = this.getOptions(apiKey, clientId)
+    const options = this.getOptions()
     const { data } = await this.http.putJson(
       this.http.urlFromPath(`listing-links/${listingLinkId}`),
       json,
@@ -161,12 +131,8 @@ export class AgentBoxService {
     return data?.response
   }
 
-  async deleteListingLink(
-    apiKey: string,
-    clientId: string,
-    listingLinkId: string,
-  ) {
-    const options = this.getOptions(apiKey, clientId)
+  async deleteListingLink(listingLinkId: string) {
+    const options = this.getOptions()
     const { data } = await this.http.deleteJson(
       this.http.urlFromPath(`listing-links/${listingLinkId}`),
       AgentBoxDeleteListingLinkResponse,
@@ -176,12 +142,8 @@ export class AgentBoxService {
     return data?.response
   }
 
-  async getNotes(
-    apiKey: string,
-    clientId: string,
-    searchParams = getNotesSearchParams(),
-  ) {
-    const options = this.getOptions(apiKey, clientId, searchParams)
+  async getNotes(searchParams = getNotesSearchParams()) {
+    const options = this.getOptions(searchParams)
     //this.logger.log(`getNotes options: ${JSON.stringify(options)}`);
 
     const { data } = await this.http.getJson<AgentBoxGetNotes>(
@@ -193,17 +155,13 @@ export class AgentBoxService {
     return data?.response?.notes ?? []
   }
 
-  async getNotesForListingId(
-    apiKey: string,
-    clientId: string,
-    listingId: string,
-  ) {
+  async getNotesForListingId(listingId: string) {
     const searchParams = getNotesSearchParams({ listingId })
-    return await this.getNotes(apiKey, clientId, searchParams)
+    return await this.getNotes(searchParams)
   }
 
-  async createNote(apiKey: string, clientId: string, json: AgentBoxCreateNote) {
-    const options = this.getOptions(apiKey, clientId)
+  async createNote(json: AgentBoxCreateNote) {
+    const options = this.getOptions()
 
     const { data } = await this.http.postJson(
       this.http.urlFromPath(`notes`),
@@ -215,8 +173,8 @@ export class AgentBoxService {
     return data?.response
   }
 
-  async deleteNote(apiKey: string, clientId: string, noteId: string) {
-    const options = this.getOptions(apiKey, clientId)
+  async deleteNote(noteId: string) {
+    const options = this.getOptions()
     const { data } = await this.http.deleteJson(
       this.http.urlFromPath(`notes/${noteId}`),
       AgentBoxDeleteNoteResponse,

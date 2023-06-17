@@ -72,6 +72,8 @@ const mockDeleteResponse = (path: string, response: Record<string, any>) => {
 const getDependencies = async () => {
   const service = new AgentBoxService({
     baseUrl,
+    clientId,
+    apiKey,
   })
 
   return { service }
@@ -85,7 +87,7 @@ describe('AgentBoxHttpService', () => {
       if (RUN_WITH_MOCKS) mockGetResponse('/staff', staffsResponse)
       const { service } = await getDependencies()
 
-      const staffs = await service.getStaffs(apiKey, clientId)
+      const staffs = await service.getStaffs()
       expect(staffs).toBeDefined()
 
       if (!RUN_WITH_MOCKS) return
@@ -99,7 +101,7 @@ describe('AgentBoxHttpService', () => {
       if (RUN_WITH_MOCKS) mockGetResponse('/inspections', inspectionsResponse)
       const { service } = await getDependencies()
 
-      const inspections = await service.getInspections(apiKey, clientId)
+      const inspections = await service.getInspections()
       expect(inspections).toBeDefined()
 
       if (!RUN_WITH_MOCKS) return
@@ -113,7 +115,7 @@ describe('AgentBoxHttpService', () => {
       if (RUN_WITH_MOCKS) mockGetResponse('/listings', listingsResponse)
       const { service } = await getDependencies()
 
-      const listings = await service.getListings(apiKey, clientId)
+      const listings = await service.getListings()
       expect(listings).toBeDefined()
 
       if (!RUN_WITH_MOCKS) return
@@ -131,11 +133,7 @@ describe('AgentBoxHttpService', () => {
 
       const { service } = await getDependencies()
 
-      const listingLinks = await service.getListingLinksForListingId(
-        apiKey,
-        clientId,
-        listingId,
-      )
+      const listingLinks = await service.getListingLinksForListingId(listingId)
 
       expect(listingLinks).toBeDefined()
 
@@ -159,12 +157,7 @@ describe('AgentBoxHttpService', () => {
 
       const { service } = await getDependencies()
 
-      const response = await service.updateListingLink(
-        apiKey,
-        clientId,
-        update,
-        listingLinkId,
-      )
+      const response = await service.updateListingLink(update, listingLinkId)
 
       expect(response).toBeDefined()
       expect(response).toMatchObject(updateListingLinkResponse.response)
@@ -191,7 +184,7 @@ describe('AgentBoxHttpService', () => {
 
       const { service } = await getDependencies()
 
-      const response = await service.createListingLink(apiKey, clientId, create)
+      const response = await service.createListingLink(create)
 
       expect(response).toBeDefined()
       expect(response).toMatchObject(createListingLinkResponse.response)
@@ -207,11 +200,7 @@ describe('AgentBoxHttpService', () => {
 
       const { service } = await getDependencies()
 
-      const response = await service.deleteListingLink(
-        apiKey,
-        clientId,
-        listingLinkId,
-      )
+      const response = await service.deleteListingLink(listingLinkId)
 
       expect(response).toBeDefined()
       expect(response).toMatchObject(deleteListingLinkResponse.response)
@@ -226,11 +215,7 @@ describe('AgentBoxHttpService', () => {
 
       const { service } = await getDependencies()
 
-      const notes = await service.getNotesForListingId(
-        apiKey,
-        clientId,
-        listingId,
-      )
+      const notes = await service.getNotesForListingId(listingId)
 
       expect(notes).toBeDefined()
       expect(notes).toMatchObject(getNotesResponse.response.notes)
@@ -254,7 +239,7 @@ describe('AgentBoxHttpService', () => {
 
       const { service } = await getDependencies()
 
-      const response = await service.createNote(apiKey, clientId, create)
+      const response = await service.createNote(create)
 
       expect(response).toBeDefined()
       expect(response).toMatchObject(createNoteResponse.response)
@@ -269,7 +254,7 @@ describe('AgentBoxHttpService', () => {
 
       const { service } = await getDependencies()
 
-      const response = await service.deleteNote(apiKey, clientId, noteId)
+      const response = await service.deleteNote(noteId)
 
       expect(response).toBeDefined()
       expect(response).toMatchObject(deleteNoteResponse.response)
