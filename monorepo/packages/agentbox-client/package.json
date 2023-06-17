@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "AgentBox CRM integration",
   "author": "DBC",
-  "private": true,
-  "license": "UNLICENSED",
+  "private": false,
+  "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
