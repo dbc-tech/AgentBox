@@ -17,6 +17,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+          registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
         run: yarn --frozen-lockfile
@@ -30,3 +31,5 @@ jobs:
       - name: Publish AgentBox client package
         working-directory: ./monorepo/packages/agentbox-client
         run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
