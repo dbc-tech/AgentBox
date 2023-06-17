@@ -1,7 +1,7 @@
 {
   "name": "@dbc-tech/agentbox-client",
-  "version": "0.0.1",
-  "description": "AgentBox CRM integration with Nest module",
+  "version": "1.0.0",
+  "description": "AgentBox CRM integration",
   "author": "DBC",
   "private": true,
   "license": "UNLICENSED",
