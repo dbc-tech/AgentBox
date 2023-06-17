@@ -1,0 +1,38 @@
+{
+  "name": "@dbc-tech/agentbox-client",
+  "version": "0.0.1",
+  "description": "AgentBox CRM integration with Nest module",
+  "author": "DBC",
+  "private": true,
+  "license": "UNLICENSED",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
+  "scripts": {
+    "lint": "eslint . --fix",
+    "test": "jest",
+    "build": "rimraf ./dist && tsc --build tsconfig.build.json",
+    "build:pack": "yarn run build && yarn pack"
+  },
+  "dependencies": {
+    "@dbc-tech/http-kit": "^1.1.1",
+    "class-transformer": "^0.5.1",
+    "got-cjs": "^12.5.4",
+    "luxon": "^3.2.1"
+  },
+  "devDependencies": {
+    "nock": "^13.2.9",
+    "tsconfig": "*",
+    "typescript": "^5.0.2"
+  },
+  "packageManager": "yarn@1.22.19",
+  "jest": {
+    "testEnvironment": "node",
+    "preset": "ts-jest",
+    "setupFilesAfterEnv": [
+      "./src/setupTests.ts"
+    ]
+  }
+}

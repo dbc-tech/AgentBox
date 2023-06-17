@@ -1,0 +1,37 @@
+name: Publish npm packages
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+*"
+
+defaults:
+  run:
+    working-directory: ./monorepo
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Build all
+        run: yarn build
+
+      - name: Unit test all
+        run: yarn test
+
+      - name: Publish AgentBox client package
+        working-directory: ./monorepo/packages/agentbox-client
+        run: yarn publish
+
+      - name: Publish AgentBox Nest integration package
+        working-directory: ./monorepo/packages/nest-agentbox
+        run: yarn publish
+      
