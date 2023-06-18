@@ -28,7 +28,7 @@ import { SearchParams } from './types/search'
 
 export const AGENT_BOX_API_VERSION = 2
 
-export class AgentBoxService {
+export class AgentBoxClient {
   http: HttpService
 
   constructor(private readonly config: AgentBoxConfig) {

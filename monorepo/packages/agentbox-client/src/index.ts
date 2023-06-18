@@ -1,4 +1,4 @@
-export * from './agent-box.service'
+export * from './agent-box-client'
 export * from './constants'
 export * from './dtos'
 export * from './interfaces'

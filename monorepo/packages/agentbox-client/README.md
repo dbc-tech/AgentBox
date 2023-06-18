@@ -2,7 +2,7 @@
 
 `agentbox-client` provides client connectivity to AgentBox CRM for Node js applications.
 
-To use, create a new instance of the `AgentBoxService` provider and supply base url, client id & api key.
+To use, create a new instance of the `AgentBoxClient` provider and supply base url, client id & api key.
 
 ## Get started
 

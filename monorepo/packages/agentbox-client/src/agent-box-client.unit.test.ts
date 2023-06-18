@@ -13,7 +13,7 @@ import {
   getNotesResponse,
 } from '../tests/testdata/agent-box-api/notes'
 import { staffsResponse } from '../tests/testdata/agent-box-api/staffs'
-import { AgentBoxService } from './agent-box.service'
+import { AgentBoxClient } from './agent-box-client'
 import { AgentBoxListingLinkType } from './constants'
 import { AgentBoxCreateListingLink } from './dtos/agent-box-create-listing-link.dto'
 import { AgentBoxCreateNote } from './dtos/agent-box-create-note.dto'
@@ -70,7 +70,7 @@ const mockDeleteResponse = (path: string, response: Record<string, any>) => {
 }
 
 const getDependencies = async () => {
-  const service = new AgentBoxService({
+  const service = new AgentBoxClient({
     baseUrl,
     clientId,
     apiKey,
@@ -79,7 +79,7 @@ const getDependencies = async () => {
   return { service }
 }
 
-describe('AgentBoxHttpService', () => {
+describe('AgentBoxClient', () => {
   afterAll(() => nock.restore())
 
   describe('.getStaffs', () => {
