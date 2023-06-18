@@ -33,3 +33,9 @@ jobs:
         run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+      - name: Publish AgentBox Nest integration package
+        working-directory: ./monorepo/packages/nest-agentbox
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

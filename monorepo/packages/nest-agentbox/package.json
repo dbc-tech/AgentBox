@@ -1,0 +1,36 @@
+{
+  "name": "@dbc-tech/nest-agentbox",
+  "version": "1.0.2",
+  "description": "AgentBox Nest integration",
+  "author": "DBC",
+  "private": false,
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
+  "scripts": {
+    "lint": "eslint . --fix",
+    "test": "jest",
+    "build": "rimraf ./dist && tsc --build tsconfig.build.json",
+    "build:pack": "yarn run build && yarn pack"
+  },
+  "dependencies": {
+    "@dbc-tech/agentbox-client": "*",
+    "@nestjs/common": "^9.0.0",
+    "rxjs": "^7.6.0"
+  },
+  "packageManager": "yarn@1.22.19",
+  "jest": {
+    "testEnvironment": "node",
+    "preset": "ts-jest",
+    "setupFilesAfterEnv": [
+      "./src/setupTests.ts"
+    ]
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}
