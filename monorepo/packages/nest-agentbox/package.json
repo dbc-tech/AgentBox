@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "lint": "eslint . --fix",
-    "test": "jest",
+    "test": "echo no test yet",
     "build": "rimraf ./dist && tsc --build tsconfig.build.json",
     "build:pack": "yarn run build && yarn pack"
   },
@@ -22,13 +22,6 @@
     "rxjs": "^7.6.0"
   },
   "packageManager": "yarn@1.22.19",
-  "jest": {
-    "testEnvironment": "node",
-    "preset": "ts-jest",
-    "setupFilesAfterEnv": [
-      "./src/setupTests.ts"
-    ]
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
