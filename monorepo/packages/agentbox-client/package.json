@@ -17,7 +17,7 @@
     "build:pack": "yarn run build && yarn pack"
   },
   "dependencies": {
-    "@dbc-tech/http-kit": "^1.1.1",
+    "@dbc-tech/http-kit": "^1.2.0",
     "class-transformer": "^0.5.1",
     "got-cjs": "^12.5.4",
     "luxon": "^3.2.1"
