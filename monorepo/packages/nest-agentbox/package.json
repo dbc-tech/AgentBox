@@ -1,6 +1,6 @@
 {
   "name": "@dbc-tech/nest-agentbox",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "AgentBox Nest integration",
   "author": "DBC",
   "private": false,
@@ -17,9 +17,17 @@
     "build:pack": "yarn run build && yarn pack"
   },
   "dependencies": {
-    "@dbc-tech/agentbox-client": "*",
+    "@dbc-tech/agentbox-client": "*"
+  },
+  "devDependencies": {
     "@nestjs/common": "^9.0.0",
-    "rxjs": "^7.6.0"
+    "rxjs": "^7.6.0",
+    "winston": "^3.9.0"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^9.0.0",
+    "rxjs": "^7.6.0",
+    "winston": "^3.9.0"
   },
   "packageManager": "yarn@1.22.19",
   "publishConfig": {
