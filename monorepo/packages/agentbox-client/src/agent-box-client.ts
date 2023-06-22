@@ -40,7 +40,6 @@ export class AgentBoxClient {
   constructor(private readonly config: AgentBoxConfig) {
     const winstonLogger =
       config.logger ?? getWinstonLogger(config.defaultLoggerOptions)
-    winstonLogger.level = 'debug'
     this.http = new HttpService(this.config.baseUrl, undefined, {
       logger: winstonLogger,
     })
