@@ -1,4 +1,8 @@
-import { HttpRequestOptions, HttpService } from '@dbc-tech/http-kit'
+import {
+  HttpRequestOptions,
+  HttpService,
+  getWinstonLogger,
+} from '@dbc-tech/http-kit'
 import { Logger } from 'winston'
 import {
   AgentBoxCreateListingLink,
@@ -34,16 +38,13 @@ export class AgentBoxClient {
   logger: Logger
 
   constructor(private readonly config: AgentBoxConfig) {
-    if (config.logger) {
-      this.logger = config.logger
-      this.http = new HttpService(this.config.baseUrl, undefined, {
-        logger: config.logger,
-      })
-    } else {
-      this.http = new HttpService(this.config.baseUrl)
-      this.logger = this.http.logger
-    }
+    const winstonLogger =
+      config.logger ?? getWinstonLogger(config.defaultLoggerOptions)
+    this.http = new HttpService(this.config.baseUrl, undefined, {
+      logger: winstonLogger,
+    })
 
+    this.logger = winstonLogger.child({ context: 'agent-box-client' })
     this.logger.debug(`Using AgentBox baseUrl: ${config.baseUrl}`)
   }
 
@@ -58,9 +59,9 @@ export class AgentBoxClient {
   }
 
   async getStaffs(searchParams = getStaffsSearchParams()) {
-    const options = this.getOptions(searchParams)
-    this.logger.debug(`getStaffs options: ${JSON.stringify(options)}`)
+    this.logger.debug({ method: 'getStaffs', searchParams })
 
+    const options = this.getOptions(searchParams)
     const { data } = await this.http.getJson<AgentBoxGetStaffs>(
       this.http.urlFromPath('staff'),
       AgentBoxGetStaffs,
@@ -71,9 +72,9 @@ export class AgentBoxClient {
   }
 
   async getInspections(searchParams = getInspectionsSearchParams()) {
-    const options = this.getOptions(searchParams)
-    this.logger.debug(`getInspections options: ${JSON.stringify(options)}`)
+    this.logger.debug({ method: 'getInspections', searchParams })
 
+    const options = this.getOptions(searchParams)
     const { data } = await this.http.getJson<AgentBoxGetInspections>(
       this.http.urlFromPath('inspections'),
       AgentBoxGetInspections,
@@ -84,9 +85,9 @@ export class AgentBoxClient {
   }
 
   async getListings(searchParams = getListingsSearchParams()) {
-    const options = this.getOptions(searchParams)
-    this.logger.debug(`getListings options: ${JSON.stringify(options)}`)
+    this.logger.debug({ method: 'getListings', searchParams })
 
+    const options = this.getOptions(searchParams)
     const { data } = await this.http.getJson<AgentBoxGetListings>(
       this.http.urlFromPath('listings'),
       AgentBoxGetListings,
@@ -97,9 +98,9 @@ export class AgentBoxClient {
   }
 
   async getListingLinks(searchParams = getListingLinksSearchParams()) {
-    const options = this.getOptions(searchParams)
-    this.logger.debug(`getListingLinks options: ${JSON.stringify(options)}`)
+    this.logger.debug({ method: 'getListingLinks', searchParams })
 
+    const options = this.getOptions(searchParams)
     const { data } = await this.http.getJson<AgentBoxGetListingLinks>(
       this.http.urlFromPath('listing-links'),
       AgentBoxGetListingLinks,
@@ -110,11 +111,15 @@ export class AgentBoxClient {
   }
 
   async getListingLinksForListingId(listingId: string) {
+    this.logger.debug({ method: 'getListingLinksForListingId', listingId })
+
     const searchParams = getListingLinksSearchParams({ listingId })
     return await this.getListingLinks(searchParams)
   }
 
   async createListingLink(json: AgentBoxCreateListingLink) {
+    this.logger.debug({ method: 'createListingLink', json })
+
     const options = this.getOptions()
     const { data } = await this.http.postJson(
       this.http.urlFromPath('listing-links'),
@@ -130,6 +135,8 @@ export class AgentBoxClient {
     json: AgentBoxUpdateListingLink,
     listingLinkId: string,
   ) {
+    this.logger.debug({ method: 'updateListingLink', json, listingLinkId })
+
     const options = this.getOptions()
     const { data } = await this.http.putJson(
       this.http.urlFromPath(`listing-links/${listingLinkId}`),
@@ -142,6 +149,8 @@ export class AgentBoxClient {
   }
 
   async deleteListingLink(listingLinkId: string) {
+    this.logger.debug({ method: 'deleteListingLink', listingLinkId })
+
     const options = this.getOptions()
     const { data } = await this.http.deleteJson(
       this.http.urlFromPath(`listing-links/${listingLinkId}`),
@@ -153,9 +162,9 @@ export class AgentBoxClient {
   }
 
   async getNotes(searchParams = getNotesSearchParams()) {
-    const options = this.getOptions(searchParams)
-    //this.logger.log(`getNotes options: ${JSON.stringify(options)}`);
+    this.logger.debug({ method: 'getNotes', searchParams })
 
+    const options = this.getOptions(searchParams)
     const { data } = await this.http.getJson<AgentBoxGetNotes>(
       this.http.urlFromPath(`notes`),
       AgentBoxGetNotes,
@@ -166,11 +175,15 @@ export class AgentBoxClient {
   }
 
   async getNotesForListingId(listingId: string) {
+    this.logger.debug({ method: 'getNotesForListingId', listingId })
+
     const searchParams = getNotesSearchParams({ listingId })
     return await this.getNotes(searchParams)
   }
 
   async createNote(json: AgentBoxCreateNote) {
+    this.logger.debug({ method: 'createNote', json })
+
     const options = this.getOptions()
 
     const { data } = await this.http.postJson(
@@ -184,6 +197,8 @@ export class AgentBoxClient {
   }
 
   async deleteNote(noteId: string) {
+    this.logger.debug({ method: 'deleteNote', noteId })
+
     const options = this.getOptions()
     const { data } = await this.http.deleteJson(
       this.http.urlFromPath(`notes/${noteId}`),
