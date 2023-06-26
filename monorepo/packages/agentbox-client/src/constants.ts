@@ -75,3 +75,12 @@ export const AgentBoxListingType = {
 } as const
 
 export const AGENTBOX_MODULE_OPTIONS = 'AGENTBOX_MODULE_OPTIONS'
+
+export const DefaultMaskProperties = [
+  'X-Client-ID',
+  'X-API-Key',
+  'email',
+  'mobile',
+  'homePhone',
+  'workPhone',
+]
