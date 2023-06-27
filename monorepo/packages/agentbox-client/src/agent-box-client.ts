@@ -4,6 +4,7 @@ import {
   getWinstonLogger,
 } from '@dbc-tech/http-kit'
 import { Logger } from 'winston'
+import { DefaultMaskProperties } from './constants'
 import {
   AgentBoxCreateListingLink,
   AgentBoxCreateListingLinkResponse,
@@ -41,7 +42,10 @@ export class AgentBoxClient {
     const winstonLogger =
       config.logger ?? getWinstonLogger(config.defaultLoggerOptions)
     this.http = new HttpService(this.config.baseUrl, undefined, {
-      logger: winstonLogger,
+      logging: {
+        logger: winstonLogger,
+        maskProperties: DefaultMaskProperties,
+      },
     })
 
     this.logger = winstonLogger.child({ context: 'agent-box-client' })
