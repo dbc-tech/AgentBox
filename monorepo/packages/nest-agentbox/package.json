@@ -1,6 +1,6 @@
 {
   "name": "@dbc-tech/nest-agentbox",
-  "version": "1.4.1",
+  "version": "1.4.3",
   "description": "AgentBox Nest integration",
   "author": "DBC",
   "private": false,
