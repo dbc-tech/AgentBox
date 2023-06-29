@@ -17,6 +17,8 @@ const defaultSearchParams = {
 export const getStaffsSearchParams: GetSearchParamsFn<FetchStaffsConfig> = ({
   fetchPeriod = DEFAULT_FETCH_PERIOD,
   fetchAll = false,
+  crmOfficeId,
+  consolidateLocations = false,
   extraSearchParams = {},
 } = {}) => {
   const calculatedSearchParams = {}
@@ -24,6 +26,10 @@ export const getStaffsSearchParams: GetSearchParamsFn<FetchStaffsConfig> = ({
   if (!fetchAll) {
     calculatedSearchParams['filter[modifiedAfter]'] =
       getModifiedAfterDate(fetchPeriod).toISO()
+  }
+
+  if (!consolidateLocations && crmOfficeId) {
+    calculatedSearchParams['filter[officeId]'] = crmOfficeId
   }
 
   return {

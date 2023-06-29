@@ -23,6 +23,8 @@ export const getInspectionsSearchParams: GetSearchParamsFn<
 > = ({
   fetchPeriod = DEFAULT_FETCH_PERIOD,
   fetchAll = false,
+  crmOfficeId,
+  consolidateLocations = false,
   extraSearchParams = {},
 } = {}) => {
   const calculatedSearchParams = {}
@@ -31,6 +33,10 @@ export const getInspectionsSearchParams: GetSearchParamsFn<
 
   calculatedSearchParams['filter[modifiedAfter]'] =
     getModifiedAfterDate(fp).toISO()
+
+  if (!consolidateLocations && crmOfficeId) {
+    calculatedSearchParams['filter[listingOfficeId]'] = crmOfficeId
+  }
 
   return {
     ...defaultSearchParams,

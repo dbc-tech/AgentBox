@@ -34,7 +34,6 @@ describe('getListingsSearchParams()', () => {
       'filter[state]': 'QLD',
       'filter[modifiedAfter]': '2021-09-28T23:10:57.508Z',
       'filter[status]': 'Available,Pending',
-      'filter[officeId]': undefined,
     })
   })
 
@@ -58,7 +57,56 @@ describe('getListingsSearchParams()', () => {
       order: 'DESC',
       'filter[state]': 'QLD',
       'filter[modifiedAfter]': '2022-03-27T22:50:57.508Z',
-      'filter[officeId]': undefined,
+    })
+  })
+
+  it('should set office location when not consolidating', () => {
+    const searchParams = getListingsSearchParams({
+      fetchPeriod: { minutes: 20 },
+      fetchAll: false,
+      crmOfficeId: '123',
+    })
+
+    expect(searchParams).toEqual({
+      limit: 0,
+      'filter[type]': 'Sale',
+      'filter[propertyType]': 'Residential',
+      'filter[propertyCategory]':
+        'Apartment, House, Semi/Duplex, Studio, Terrace, Townhouse, Unit, Villa, Flat, SelfContainedCottage, ServicedApartment',
+      'filter[incSurroundSuburbs]': false,
+      'filter[matchAllFeature]': false,
+      include:
+        'relatedContacts,relatedStaffMembers,internalInformation,inspectionDates,mainImage,documents,mainDescription,contractDetails,permissions,externalAgents',
+      orderBy: 'listedDate',
+      order: 'DESC',
+      'filter[state]': 'QLD',
+      'filter[modifiedAfter]': '2022-03-27T22:50:57.508Z',
+      'filter[officeId]': '123',
+    })
+  })
+
+  it('should ignore office location when consolidating', () => {
+    const searchParams = getListingsSearchParams({
+      fetchPeriod: { minutes: 20 },
+      fetchAll: false,
+      crmOfficeId: '123',
+      consolidateLocations: true,
+    })
+
+    expect(searchParams).toEqual({
+      limit: 0,
+      'filter[type]': 'Sale',
+      'filter[propertyType]': 'Residential',
+      'filter[propertyCategory]':
+        'Apartment, House, Semi/Duplex, Studio, Terrace, Townhouse, Unit, Villa, Flat, SelfContainedCottage, ServicedApartment',
+      'filter[incSurroundSuburbs]': false,
+      'filter[matchAllFeature]': false,
+      include:
+        'relatedContacts,relatedStaffMembers,internalInformation,inspectionDates,mainImage,documents,mainDescription,contractDetails,permissions,externalAgents',
+      orderBy: 'listedDate',
+      order: 'DESC',
+      'filter[state]': 'QLD',
+      'filter[modifiedAfter]': '2022-03-27T22:50:57.508Z',
     })
   })
 })

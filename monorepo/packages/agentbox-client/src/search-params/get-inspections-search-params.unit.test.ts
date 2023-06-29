@@ -38,4 +38,47 @@ describe('getInspectionSearchParams()', () => {
       'filter[modifiedAfter]': '2022-03-27T22:50:57.508Z',
     })
   })
+
+  it('should include office the correct search params for the given fetch period', () => {
+    const searchParams = getInspectionsSearchParams({
+      fetchPeriod: { minutes: 20 },
+      fetchAll: false,
+    })
+
+    expect(searchParams).toEqual({
+      limit: 0,
+      include: 'contact,listing',
+      'filter[modifiedAfter]': '2022-03-27T22:50:57.508Z',
+    })
+  })
+
+  it('should include the office location when not consolidating', () => {
+    const searchParams = getInspectionsSearchParams({
+      fetchPeriod: { minutes: 20 },
+      fetchAll: false,
+      crmOfficeId: '123',
+    })
+
+    expect(searchParams).toEqual({
+      limit: 0,
+      include: 'contact,listing',
+      'filter[modifiedAfter]': '2022-03-27T22:50:57.508Z',
+      'filter[listingOfficeId]': '123',
+    })
+  })
+
+  it('should ignore the office location when consolidating', () => {
+    const searchParams = getInspectionsSearchParams({
+      fetchPeriod: { minutes: 20 },
+      fetchAll: false,
+      crmOfficeId: '123',
+      consolidateLocations: true,
+    })
+
+    expect(searchParams).toEqual({
+      limit: 0,
+      include: 'contact,listing',
+      'filter[modifiedAfter]': '2022-03-27T22:50:57.508Z',
+    })
+  })
 })

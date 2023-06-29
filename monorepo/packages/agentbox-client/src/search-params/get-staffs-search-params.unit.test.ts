@@ -37,4 +37,32 @@ describe('getInspectionSearchParams()', () => {
       'filter[modifiedAfter]': '2022-03-27T22:50:57.508Z',
     })
   })
+
+  it('should include office location when not consolidating', () => {
+    const searchParams = getStaffsSearchParams({
+      fetchPeriod: { minutes: 20 },
+      fetchAll: true,
+      crmOfficeId: '123',
+    })
+
+    expect(searchParams).toEqual({
+      limit: 0,
+      'filter[status]': 'all',
+      'filter[officeId]': '123',
+    })
+  })
+
+  it('should ignore office location when consolidating', () => {
+    const searchParams = getStaffsSearchParams({
+      fetchPeriod: { minutes: 20 },
+      fetchAll: true,
+      crmOfficeId: '123',
+      consolidateLocations: true,
+    })
+
+    expect(searchParams).toEqual({
+      limit: 0,
+      'filter[status]': 'all',
+    })
+  })
 })

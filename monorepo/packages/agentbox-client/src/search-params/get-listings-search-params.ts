@@ -55,7 +55,7 @@ export const getListingsSearchParams: GetSearchParamsFn<
     calculatedSearchParams['filter[query]'] = queryFilter
   }
 
-  if (!consolidateLocations) {
+  if (!consolidateLocations && crmOfficeId) {
     calculatedSearchParams['filter[officeId]'] = crmOfficeId
   }
 
