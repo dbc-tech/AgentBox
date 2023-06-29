@@ -13,9 +13,15 @@ export type FetchConfig = {
   extraSearchParams?: SearchParams
 }
 
-export type FetchStaffsConfig = FetchConfig
+export type FetchStaffsConfig = FetchConfig & {
+  crmOfficeId?: string
+  consolidateLocations?: boolean
+}
 
-export type FetchInspectionsConfig = FetchConfig
+export type FetchInspectionsConfig = FetchConfig & {
+  crmOfficeId?: string
+  consolidateLocations?: boolean
+}
 
 export type FetchListingsConfig = FetchConfig & {
   queryFilter?: string
