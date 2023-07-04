@@ -31,7 +31,7 @@ You'll need to specify base url, client id & API key. The easiest way is to prov
 However, it's more likely the base url is provided via `.env` file:
 
 ```
-AGENTBOX_BASE_URL: https://api.offertoown.com.au/
+AGENTBOX_BASE_URL: https://api.agentboxcrm.com.au/
 AGENTBOX_CLIENT_ID: <your client id>
 AGENTBOX_API_KEY: <your api key>
 ```
@@ -98,7 +98,7 @@ You'll need to specify base url. The easiest way is to provide it directly durin
 However, it's more likely the base url is provided via `.env` file:
 
 ```
-AGENTBOX_BASE_URL: https://api.offertoown.com.au/
+AGENTBOX_BASE_URL: https://api.agentboxcrm.com.au/
 ```
 
 In which case this can be passed via `ConfigService` using module's `registerAsync` method:

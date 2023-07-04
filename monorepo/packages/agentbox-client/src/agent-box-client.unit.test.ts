@@ -148,7 +148,7 @@ describe('AgentBoxClient', () => {
       const listingLinkId = '2'
       const update: AgentBoxUpdateListingLink = {
         listingLink: {
-          title: 'OfferToOwn Dash Link',
+          title: 'Dash Link',
         },
       }
 
@@ -171,8 +171,8 @@ describe('AgentBoxClient', () => {
       const create: AgentBoxCreateListingLink = {
         listingLink: {
           type: AgentBoxListingLinkType.GeneralExternalLink,
-          title: 'OfferToOwn Main Link',
-          url: 'https://www.offertoown.com.au/',
+          title: 'Main Link',
+          url: 'https://www.example.com/',
           attachedListing: {
             id: listingId,
           },
@@ -228,8 +228,8 @@ describe('AgentBoxClient', () => {
 
       const create: AgentBoxCreateNote = {
         note: {
-          headline: 'Offer to Own',
-          description: 'https://uat.offer2own.co/lvwCX',
+          headline: 'Notes',
+          description: 'https://example.com/abc',
           isPublic: true,
           attachedListings: [{ id: listingId }],
         },
