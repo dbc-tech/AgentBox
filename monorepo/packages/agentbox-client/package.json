@@ -1,6 +1,6 @@
 {
   "name": "@dbc-tech/agentbox-client",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "AgentBox CRM integration",
   "repository": "https://github.com/dbc-tech/agentbox",
   "author": "DBC",
@@ -19,7 +19,7 @@
     "build:pack": "yarn run build && yarn pack"
   },
   "dependencies": {
-    "@dbc-tech/http-kit": "^1.4.4",
+    "@dbc-tech/http-kit": "^1.4.7",
     "class-transformer": "^0.5.1",
     "got-cjs": "^12.5.4",
     "luxon": "^3.2.1"
