@@ -2,7 +2,7 @@
   "name": "@dbc-tech/agentbox",
   "version": "1.0.0",
   "description": "A Node.js HTTP client package for AgentBox CRM",
-  "repository": "https://github.com/dbc-tech/AgentBox",
+  "repository": "https://github.com/dbc-tech/agentbox",
   "license": "MIT",
   "private": true,
   "workspaces": [
