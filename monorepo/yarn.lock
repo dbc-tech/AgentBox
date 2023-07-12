@@ -313,10 +313,10 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@dbc-tech/http-kit@^1.4.8":
-  version "1.4.8"
-  resolved "https://registry.yarnpkg.com/@dbc-tech/http-kit/-/http-kit-1.4.8.tgz#882ccce9c5b08f9222f186492a798f6d77e78370"
-  integrity sha512-aa/McnVe7lYrcaV/ZSFXyIFeV5EkNOKTKCg5kZv4STwWw8X0UcAgdO4VcBHEg9e8s/kXMOTlbpXbaACLyJ4BOw==
+"@dbc-tech/http-kit@^1.4.9":
+  version "1.4.9"
+  resolved "https://registry.yarnpkg.com/@dbc-tech/http-kit/-/http-kit-1.4.9.tgz#7f6e2e4f112a1acfe8c35d705d93879d87dc99c8"
+  integrity sha512-5sEadclG7LAjhBfWj072r7NlWncMtoM7UCDc/rOoUxjyGRq5U0U5QSyHYRlEmq9vA6ITv3bEUffNaHASLk7v3A==
   dependencies:
     class-transformer "^0.5.1"
     cockatiel "^3.1.1"
